@@ -17,39 +17,34 @@ let name;
  
 
 name.children().on('click',function(){
-  // if($(this).length == 0) ;
 
-  if($(this).length > 0){
+ 
 
 
 fetch('https://jsonplaceholder.typicode.com/comments')
 .then(response => response.json())
 .then(json => {
+  if(!($(this).children().hasClass('sub'))){
   for(const q in json){
     // console.log(json[q].name);
 
     if(json[q].id ==$(this)[0].id ){
         // console.log('equals');
         $(this).append(`<div class=sub>${json[q].name}</div>`);
+        // console.log($(this));
+        // console.log($(this).children().hasClass('sub'));
 
     };
   };
+  }else{
+
+    $(this).each(function(index){
+      $(this).children(":first")[0].remove();
+      return true;
+      
+              })
+  }
 });
-
-
-
-    }else if($(this).length == 0){
-
-        $(this).each(function(index){
-$(this).children(":first")[0].remove();
-return true;
-
-        })
-        valid=true;
-    }
-
-
-
 });
       
 
